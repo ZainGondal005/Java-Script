@@ -43,3 +43,29 @@ const BMIMark = massMark / op ** 2;
 const BMIjon = massjon / (op * opMark);
 const opp = BMIMark > BMIjon;
 console.log(BMIMark, BMIjon, opp);
+
+const Birthdate = 2004;
+const now_year = 2024;
+const name = "zain";
+
+const person = "I am " + name + " age is : " + (now_year - Birthdate);
+
+console.log(person);
+
+const newperson = `I'm ${name}, a ${now_year - Birthdate}`;
+
+console.log(newperson);
+
+console.log(`templates 
+multiple
+lines`);
+
+const driverage = 15;
+const isold = driverage >= 18;
+if (isold) {
+  console.log("You can drive");
+} else {
+  console.log(
+    "you are under arrest because left years are : " + (18 - driverage)
+  );
+}
