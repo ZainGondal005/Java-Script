@@ -69,3 +69,27 @@ if (isold) {
     "you are under arrest because left years are : " + (18 - driverage)
   );
 }
+
+//conversion
+
+const inputyear = "2000";
+console.log(inputyear, Number(inputyear));
+console.log(Number(inputyear) + 4);
+
+console.log(String(1005), 1005);
+
+//type coercen
+//moves form left to right
+console.log("I am " + name + " age is : " + (now_year - Birthdate)); // + is coercen means convert one or two data types
+console.log("23" - "10" - 3); // - convert to numbers now//10
+console.log("23" + "10" - 3); //2307
+console.log("23" - "10" + 3); //16
+// - comes string converts to number
+console.log("23" * "10" - 3);
+console.log("293" / "10" - 3);
+
+var n = "1" + 1;
+n--;
+console.log(n);
+
+console.log("10" - "4" -'3'-2+'5')//15
