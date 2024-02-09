@@ -92,4 +92,51 @@ var n = "1" + 1;
 n--;
 console.log(n);
 
-console.log("10" - "4" -'3'-2+'5')//15
+console.log("10" - "4" - "3" - 2 + "5"); //15
+
+const person_valid = true;
+const Idvalid = false;
+console.log(person_valid && Idvalid);
+console.log(person_valid || Idvalid);
+
+const dolscorce = (96 + 108 + 89) / 3;
+const koalas = (88 + 91 + 110) / 3;
+
+if (dolscorce > koalas) {
+  console.log("dolscorce is more");
+} else if (dolscorce === koalas) {
+  console.log("dolscorce and koalas are equals");
+} else {
+  console.log("koalas is more");
+}
+
+const day = Number(prompt("Enter a day number"));
+switch (day) {
+  case 1:
+    console.log("Monday");
+    break;
+  case 2:
+    console.log("Tuesday");
+    break;
+  case 3:
+    console.log("Wednesday");
+    break;
+  case 4:
+    console.log("Thusday");
+    break;
+  case 5:
+    console.log("Friday");
+    break;
+  case 6:
+    console.log("Saurday");
+    break;
+  case 7:
+    console.log("Sunday");
+    break;
+
+  default:
+    
+    console.log("Invalid number");
+    
+    break;
+}
