@@ -110,7 +110,7 @@ if (dolscorce > koalas) {
   console.log("koalas is more");
 }
 
-const day = Number(prompt("Enter a day number"));
+const day = 3; //= Number(prompt("Enter a day number"));
 switch (day) {
   case 1:
     console.log("Monday");
@@ -135,8 +135,17 @@ switch (day) {
     break;
 
   default:
-    
     console.log("Invalid number");
-    
+
     break;
 }
+const person_age = 12;
+person_age >= 18
+  ? console.log("I want to drink")
+  : console.log("you cannot win");
+
+const bill = 275;
+
+var tip = bill >= 50 && bill <= 300 ? (bill * 15) / 100 : (bill * 20) / 100;
+console.log(`Your bill is ${bill},and tip is ${tip}
+  Total bill is ${bill + tip}  `);
