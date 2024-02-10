@@ -21,7 +21,7 @@ function fruits(apples, watermelon) {
 
   return juice;
 }
-const ju = fruits(3,5);
+const ju = fruits(3, 5);
 console.log(ju);
 
 // Coding Challenge #1
@@ -45,3 +45,21 @@ HINT: To check if number A is at least double number B, check for A >= 2 * B. Ap
 
 GOOD LUCK 😀
 */
+
+function calcAverage(score1, score2, score3) {
+  return (score1 + score2 + score3) / 3;
+}
+function checkWinner(avgKoal, avgDolhi) {
+  if (avgKoal >= avgDolhi * 2) {
+    return `Koalas win ${avgKoal} vs ${avgDolhi}`;
+  } else if (avgDolhi >= avgKoal * 2) {
+    return `Dolphins win  ${avgDolhi} vs ${avgKoal}`;
+  }
+  return `no team wins
+  Dolphins scorces are ${avgDolhi} and Koalas scorces are ${avgKoal} `;
+}
+
+const avgDolhins = calcAverage(85, 54, 41);
+const avgKoalas = calcAverage(23, 34, 27);
+
+console.log(checkWinner(avgKoalas, avgDolhins));
