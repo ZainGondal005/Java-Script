@@ -88,3 +88,20 @@ const ages = [
   calcAge(years[years.length - 1]),
 ];
 console.log(ages);
+
+years.push(2004);
+years.unshift(2000);
+console.log(years);
+years.pop(); //last
+years.shift(); //first
+console.log(years);
+
+console.log(years.indexOf(1967));
+
+console.log(years.includes(2002));
+console.log(years.includes(2004));
+console.log(years.includes(23));
+
+if (years.includes(2002)) {
+  console.log("You have a friend called Steven");
+}
