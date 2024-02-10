@@ -27,7 +27,7 @@ console.log(ju);
 // Coding Challenge #1
 
 /*
-Back to the two gymnastics teams, the Dolphins and the Koalas! There is a new gymnastics discipline, which works differently.
+Two gymnastics teams, the Dolphins and the Koalas! There is a new gymnastics discipline, which works differently.
 Each team competes 3 times, and then the average of the 3 scores is calculated (so one average score per team).
 A team ONLY wins if it has at least DOUBLE the average score of the other team. Otherwise, no team wins!
 
@@ -43,7 +43,6 @@ TEST DATA 2: Dolphins score 85, 54 and 41. Koalas score 23, 34 and 27
 HINT: To calculate average of 3 values, add them all together and divide by 3
 HINT: To check if number A is at least double number B, check for A >= 2 * B. Apply this to the team's average scores 😉
 
-GOOD LUCK 😀
 */
 
 function calcAverage(score1, score2, score3) {
@@ -63,3 +62,29 @@ const avgDolhins = calcAverage(85, 54, 41);
 const avgKoalas = calcAverage(23, 34, 27);
 
 console.log(checkWinner(avgKoalas, avgDolhins));
+
+// Arrays
+
+const friends = ["ali", "zain", "masood"];
+console.log(friends);
+console.log(friends[friends.length - 1]);
+const person = ["zain", "masood", 2024 - 2004, friends];
+console.log(person);
+
+// Exercise
+const calcAge = function (birthYeah) {
+  return 2037 - birthYeah;
+};
+const years = [1990, 1967, 2002, 2010, 2018];
+
+const age1 = calcAge(years[0]);
+const age2 = calcAge(years[1]);
+const age3 = calcAge(years[years.length - 1]);
+console.log(age1, age2, age3);
+
+const ages = [
+  calcAge(years[0]),
+  calcAge(years[1]),
+  calcAge(years[years.length - 1]),
+];
+console.log(ages);
