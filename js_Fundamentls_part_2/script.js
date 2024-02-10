@@ -105,3 +105,17 @@ console.log(years.includes(23));
 if (years.includes(2002)) {
   console.log("You have a friend called Steven");
 }
+
+// ojects
+
+const object_is = {
+  firstname: "zain",
+  Lastname: "masood",
+  cnic: 3401,
+  DEyears: [1990, 1967, 2002, 2010, 2018],
+};
+
+console.log(object_is);
+console.log(object_is["firstname "]);
+
+console.log(object_is.DEyears[1]);
