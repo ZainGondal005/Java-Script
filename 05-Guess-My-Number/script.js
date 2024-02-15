@@ -12,8 +12,8 @@ document.querySelector(".score").textContent = 10;
 document.querySelector(".guess").value = 23;
 console.log(document.querySelector(".guess").value);
 */
-const secret_number = Math.trunc(Math.random() * 20) + 1;
-document.querySelector(".number").textContent = secret_number;
+var secret_number = Math.trunc(Math.random() * 20) + 1;
+// document.querySelector(".number").textContent = secret_number;
 
 var score_points = 20;
 var highscore = 0;
@@ -40,13 +40,13 @@ document.querySelector(".check").addEventListener("click", function () {
       document.querySelector(".highscore").textContent = highscore;
     }
   } // When guess is wrong
-  else if (guess !== secretNumber) {
-    if (score > 1) {
+  else if (guess !== secret_number) {
+    if (score_points > 1) {
       // document.querySelector('.message').textContent =
-      // guess > secretNumber ? '📈 Too high!' : '📉 Too low!';
-      displayMessage(guess > secretNumber ? "📈 Too high!" : "📉 Too low!");
-      score--;
-      document.querySelector(".score").textContent = score;
+      // guess > secret_number ? '📈 Too high!' : '📉 Too low!';
+      score_points--;
+      document.querySelector(".score").textContent = score_points;
+      displayMessage(guess > secret_number ? "📈 Too high!" : "📉 Too low!");
     } else {
       // document.querySelector('.message').textContent = '💥 You lost the game!';
       displayMessage("💥 You lost the game!");
@@ -78,12 +78,12 @@ document.querySelector(".check").addEventListener("click", function () {
 });
 
 document.querySelector(".again").addEventListener("click", function () {
-  score = 20;
-  secretNumber = Math.trunc(Math.random() * 20) + 1;
+  score_points = 20;
+  secret_number = Math.trunc(Math.random() * 20) + 1;
 
-  // document.querySelector('.message').textContent = 'Start guessing...';
-  displayMessage("Start guessing...");
-  document.querySelector(".score").textContent = score;
+  document.querySelector(".message").textContent = "Start guessing...";
+  // displayMessage("Start guessing...");
+  document.querySelector(".score").textContent = score_points;
   document.querySelector(".number").textContent = "?";
   document.querySelector(".guess").value = "";
 
