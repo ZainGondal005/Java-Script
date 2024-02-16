@@ -2,28 +2,39 @@
 
 const player0EL = document.querySelector(".player--0");
 const player1EL = document.querySelector(".player--1");
-const score0EL = document.querySelector("#score--0");
 
+const score0EL = document.querySelector("#score--0");
 const score1EL = document.getElementById("score--1");
 
 const current0EL = document.getElementById("current--0");
 const current1EL = document.getElementById("current--1");
 
 const diceEL = document.querySelector(".dice");
-
 var btnNew = document.querySelector(".btn--new");
 var btnRoll = document.querySelector(".btn--roll");
 var btnHold = document.querySelector(".btn--hold");
 
-score0EL.textContent = 0;
-score1EL.textContent = 0;
-diceEL.classList.add("hidden");
+let currentscore, activePlayer, scores, playerwon;
 
-var currentscore = 0;
-var activePlayer = 0;
-var scores = [0, 0];
-var playerwon = true;
+const init = function () {
+  currentscore = 0;
+  activePlayer = 0;
+  scores = [0, 0];
+  playerwon = true;
 
+  score0EL.textContent = 0;
+  score1EL.textContent = 0;
+  current0EL.textContent = 0;
+  current1EL.textContent = 0;
+
+  diceEL.classList.add("hidden");
+  player0EL.classList.remove("player--winner");
+  player1EL.classList.remove("player--winner");
+  player0EL.classList.add("player--active");
+  player1EL.classList.remove("player--active");
+};
+
+init();
 //rolling dice functionallity
 
 btnRoll = document.addEventListener("click", function () {
@@ -61,7 +72,7 @@ btnHold.addEventListener("click", function () {
     // console.log(scores[0], scorces[1]);
     document.getElementById(`score--${activePlayer}`).textContent =
       scores[activePlayer];
-    if (scores[activePlayer] >= 20) {
+    if (scores[activePlayer] >= 100) {
       playerwon = false;
       document
         .querySelector(`.player--${activePlayer}`)
@@ -71,12 +82,20 @@ btnHold.addEventListener("click", function () {
         .classList.add("player--active");
 
       btnHold.classList.add("hidden");
-      // btnRoll.classList.add("hidden");
-      document.querySelector(`.btn--roll`).classList.add("hidden");
-      // document.querySelector(`.dice`).classList.add("hidden");
+
+      document.querySelector(".btn--roll").classList.add("hidden");
+
       diceEL.classList.add("hidden");
     } else {
       Switch_Player();
     }
   }
+});
+
+btnNew.addEventListener("click", function () {
+  document.querySelector(`.btn--roll`).classList.remove("hidden");
+
+  btnHold.classList.remove("hidden");
+
+  init();
 });
