@@ -216,7 +216,7 @@ const jessica2 = {
   family: ["Alice", "Bob"],
 };
 
-const jessicaCopy = Object.assign({}, jessica2);
+const jessicaCopy = Object.assign({}, jessica2);//source , destination
 jessicaCopy.lastName = "Davis";
 
 jessicaCopy.family.push("Mary");
