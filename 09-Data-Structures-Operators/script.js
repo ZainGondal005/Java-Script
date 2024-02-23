@@ -417,9 +417,30 @@ rest.delete(2);
 // rest.clear();
 
 const map_arr = [1, 2];
-rest.set(map_arr, 'Test');
-rest.set(document.querySelector('h1'), 'Heading');
+rest.set(map_arr, "Test");
+rest.set(document.querySelector("h1"), "Heading");
 console.log(rest);
 console.log(rest.size);
 
 // console.log(rest.get(map_arr));
+
+const question = new Map([
+  ["questions", "What is the best programming language in the world?"],
+  [1, "C"],
+  [2, "Java"],
+  [3, "JavaScript"],
+  ["correct", 3],
+  [true, "Correct 🎉"],
+  [false, "Try again!"],
+]);
+console.log(question);
+
+console.log(question.get("questions"));
+for (const [key, value] of question) {
+  if (typeof key === "number") console.log(` ${key}: ${value}`);
+}
+
+const answer = Number(prompt("your answer"));
+console.log(answer);
+
+console.log(question.get(question.get("correct") === answer));
