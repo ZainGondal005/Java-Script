@@ -416,10 +416,10 @@ console.log(rest.has("categories"));
 rest.delete(2);
 // rest.clear();
 
-// const arr = [1, 2];
-// rest.set(arr, 'Test');
-// rest.set(document.querySelector('h1'), 'Heading');
+const map_arr = [1, 2];
+rest.set(map_arr, 'Test');
+rest.set(document.querySelector('h1'), 'Heading');
 console.log(rest);
 console.log(rest.size);
 
-// console.log(rest.get(arr));
+// console.log(rest.get(map_arr));
