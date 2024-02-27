@@ -552,17 +552,27 @@ console.log(passenger_space);
 const passengerCorrect =
   passengerlower[0].toUpperCase() +
   passengerlower.slice(1, passenger.lastIndexOf(" ")) +
-  " " + passenger_space[0].toUpperCase() +
+  " " +
+  passenger_space[0].toUpperCase() +
   passenger_space.slice(1).toLowerCase();
 console.log(passengerCorrect);
 
-
 // Comparing emails
-const email = 'hello@zain.io'; 
-const loginEmail = '  Hello@Zain.Io \n';
+const email = "hello@zain.io";
+const loginEmail = "  Hello@Zain.Io \n";
 
 // const lowerEmail = loginEmail.toLowerCase();
 // const trimmedEmail = lowerEmail.trim();
 const normalizedEmail = loginEmail.toLowerCase().trim();
 console.log(normalizedEmail);
 console.log(email === normalizedEmail);
+
+const priceGB = "288,97£";
+const priceUS = priceGB.replace("£", "$").replace(",", ".");
+console.log(priceUS);
+const announcement =
+  "All passengers come to boarding door 23. Boarding door 23!";
+
+console.log(announcement.replace("door", "gate"));
+// console.log(announcement.replaceAll('door', 'gate'));
+// console.log(announcement.replace(/door/g, "gate"));
