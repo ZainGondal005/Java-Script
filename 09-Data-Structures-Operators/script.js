@@ -574,5 +574,23 @@ const announcement =
   "All passengers come to boarding door 23. Boarding door 23!";
 
 console.log(announcement.replace("door", "gate"));
-// console.log(announcement.replaceAll('door', 'gate'));
+console.log(announcement.replaceAll("door", "gate"));
 // console.log(announcement.replace(/door/g, "gate"));
+
+const checkBaggage = function (items) {
+  const baggage = items.toLowerCase();
+
+  if (baggage.includes("knife") || baggage.includes("gun")) {
+    console.log("You are NOT allowed on board");
+  } else {
+    console.log("Welcome aboard!");
+  }
+};
+
+const plane_pass = "Airbus A320neo";
+console.log(plane_pass.includes("A320"));
+console.log(plane_pass.includes("Boeing"));
+console.log(plane_pass.startsWith("Airb"));
+if (plane_pass.startsWith("Airbus") && plane_pass.endsWith("neo")) {
+  console.log("Part of the NEW ARirbus family");
+}
