@@ -499,28 +499,27 @@ for (const [min, events] of footballEvents) {
   console.log(`[${half} Half] ${min}:${events}`);
 }
 
-
 // Working With Strings - Part 1
-const airline = 'TAP Air Portugal';
-const plane = 'A320';
+const airline = "TAP Air Portugal";
+const plane = "A320";
 
 console.log(plane[0]);
 console.log(plane[1]);
 console.log(plane[2]);
-console.log('B737'[0]);
+console.log("B737"[0]);
 
 console.log(airline.length);
-console.log('B737'.length);
+console.log("B737".length);
 
-console.log(airline.indexOf('r'));
-console.log(airline.lastIndexOf('r'));
-console.log(airline.indexOf('portugal'));
+console.log(airline.indexOf("r"));
+console.log(airline.lastIndexOf("r"));
+console.log(airline.indexOf("portugal"));
 
 console.log(airline.slice(4));
 console.log(airline.slice(4, 7));
 
-console.log(airline.slice(0, airline.indexOf(' ')));
-console.log(airline.slice(airline.lastIndexOf(' ') + 1));
+console.log(airline.slice(0, airline.indexOf(" ")));
+console.log(airline.slice(airline.lastIndexOf(" ") + 1));
 
 console.log(airline.slice(-2));
 console.log(airline.slice(1, -1));
@@ -528,15 +527,42 @@ console.log(airline.slice(1, -1));
 const checkMiddleSeat = function (seat) {
   // B and E are middle seats
   const s = seat.slice(-1);
-  if (s === 'B' || s === 'E') console.log('You got the middle seat 😬');
-  else console.log('You got lucky 😎');
+  if (s === "B" || s === "E") console.log("You got the middle seat 😬");
+  else console.log("You got lucky 😎");
 };
 
-checkMiddleSeat('11B');
-checkMiddleSeat('23C');
-checkMiddleSeat('3E');
+checkMiddleSeat("11B");
+checkMiddleSeat("23C");
+checkMiddleSeat("3E");
 
-console.log(new String('jonas'));
-console.log(typeof new String('jonas'));
+console.log(new String("Zain"));
+console.log(typeof new String("zain"));
 
-console.log(typeof new String('jonas').slice(1));
+console.log(typeof new String("zain").slice(1));
+
+console.log(airline.toLowerCase());
+console.log(airline.toUpperCase());
+
+const passenger = "ZaIn MasoOd";
+const passengerlower = passenger.toLowerCase();
+const passenger_space = passenger.slice(passenger.lastIndexOf(" ") + 1);
+console.log(passenger_space);
+// console.log(passenger_space.slice(0, passenger_space.indexOf(" ")));
+// console.log(passenger_space.slice(passenger_space.lastIndexOf(" ") + 1));
+const passengerCorrect =
+  passengerlower[0].toUpperCase() +
+  passengerlower.slice(1, passenger.lastIndexOf(" ")) +
+  " " + passenger_space[0].toUpperCase() +
+  passenger_space.slice(1).toLowerCase();
+console.log(passengerCorrect);
+
+
+// Comparing emails
+const email = 'hello@zain.io'; 
+const loginEmail = '  Hello@Zain.Io \n';
+
+// const lowerEmail = loginEmail.toLowerCase();
+// const trimmedEmail = lowerEmail.trim();
+const normalizedEmail = loginEmail.toLowerCase().trim();
+console.log(normalizedEmail);
+console.log(email === normalizedEmail);
