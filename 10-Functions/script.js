@@ -17,16 +17,15 @@ const create_booking = function (
 
 create_booking("lqr3", undefined, 1000);
 
-
-const flight = 'LH234';
+const flight = "LH234";
 const jonas = {
-  name: 'Jonas Schmedtmann',
+  name: "Jonas Schmedtmann",
   passport: 24739479284,
 };
 
 const checkIn = function (flightNum, passenger) {
-  flightNum = 'LH999';
-  passenger.name = 'Mr. ' + passenger.name;
+  flightNum = "LH999";
+  passenger.name = "Mr. " + passenger.name;
 
   if (passenger.passport === 24739479284) {
     // alert('Checked in');
@@ -52,12 +51,12 @@ checkIn(flight, jonas);
 
 // Functions Accepting Callback Functions
 const oneWord = function (str) {
-  return str.replace(/ /g, '').toLowerCase();
+  return str.replace(/ /g, "").toLowerCase();
 };
 
 const upperFirstWord = function (str) {
-  const [first, ...others] = str.split(' ');
-  return [first.toUpperCase(), ...others].join(' ');
+  const [first, ...others] = str.split(" ");
+  return [first.toUpperCase(), ...others].join(" ");
 };
 
 // Higher-order function
@@ -68,6 +67,68 @@ const transformer = function (str, fn) {
   console.log(`Transformed by: ${fn.name}`);
 };
 
-transformer('JavaScript is the best!', upperFirstWord);
-transformer('JavaScript is the best!', oneWord);
- 
+transformer("JavaScript is the best!", upperFirstWord);
+transformer("JavaScript is the best!", oneWord);
+
+// Functions Returning Functions
+const greet = function (greeting) {
+  return function (name) {
+    console.log(`${greeting} ${name}`);
+  };
+};
+
+const greeterHey = greet("Hey");
+greeterHey("Jonas");
+greeterHey("Steven");
+
+greet("Hello")("Jonas");
+
+const greetnow = (greeting) => (name) => console.log(`${greeting} ${name}`);
+greetnow("Hi")("Jonas");
+
+const PIA = {
+  airline: "PIA",
+  PIAcode: "op",
+  bookingPIA: [],
+  book(numberPIA, name) {
+    console.log(
+      `${name} booked seat  on ${this.airline} flight ${this.PIAcode} ${numberPIA}`
+    );
+    this.bookingPIA.push({ flight: `${this.PIAcode} ${numberPIA}`, name });
+  },
+};
+
+PIA.book(239, "ZAIN Masood");
+PIA.book(635, "ZAIN op");
+
+const eurowings = {
+  airline: "Eurowings",
+  PIAcode: "EW",
+  bookingPIA: [],
+};
+
+const book = PIA.book;
+
+// Does NOT work
+// book(23, 'Sarah Williams');
+
+// Call method
+book.call(eurowings, 23, "Sarah Williams");
+console.log(eurowings);
+
+book.call(PIA, 239, "Mary Cooper");
+console.log(PIA);
+
+const swiss = {
+  airline: "swiss",
+  PIAcode: "LW",
+  bookingPIA: [],
+};
+book.call(swiss, 583, "Mary Cooper");
+
+// Apply method
+const flightData = [583, "George Cooper"];
+book.apply(swiss, flightData);
+console.log(swiss);
+
+book.call(swiss, ...flightData);
