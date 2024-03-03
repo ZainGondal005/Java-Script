@@ -70,13 +70,33 @@ const displayMovements = function (movements) {
   <div class="movements__type movements__type--${type} ">${
       i + 1
     } ${type} </div>  
-  <div class="movements__value">${mov}€ </div>
+  <div class="movements__value">${mov} € </div>
 </div>
  `;
     containerMovements.insertAdjacentHTML("afterbegin", html);
   });
 };
 displayMovements(account1.movements);
+
+const calcDisplayBalance = function (movement) {
+  const balance = movement.reduce((acc, curr) => acc + curr, 0);
+  labelBalance.textContent = `${balance} €`;
+};
+calcDisplayBalance(account1.movements);
+
+const CreateuserNames = function (accs) {
+  accs.forEach(function (acc) {
+    acc.username = acc.owner
+      .toLowerCase()
+      .split(" ")
+      .map((name) => name[0])
+      .join("");
+    console.log(acc.username);
+  });
+};
+CreateuserNames(accounts);
+console.log(account1);
+
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
