@@ -84,6 +84,25 @@ const calcDisplayBalance = function (movement) {
 };
 calcDisplayBalance(account1.movements);
 
+const CalcDisplaySummary = function (movements) {
+  const incomes = movements
+    .filter((mov) => mov > 0)
+    .reduce((acc, curr) => acc + curr, 0);
+  labelSumIn.textContent = `${incomes} €`;
+
+  const outgoingIncome = movements
+    .filter((mov) => mov < 0)
+    .reduce((acc, curr) => acc + curr, 0);
+  labelSumOut.textContent = `${Math.abs(outgoingIncome)} €`;
+
+  const interest = movements
+    .filter((mov) => mov > 0)
+    .map((deposits) => (deposits * 1.2) / 100)
+    .filter((intr) => intr >= 1)
+    .reduce((acc, curr) => acc + curr, 0);
+  labelSumInterest.textContent = `${interest} €`;
+};
+CalcDisplaySummary(account1.movements);
 const CreateuserNames = function (accs) {
   accs.forEach(function (acc) {
     acc.username = acc.owner
@@ -275,13 +294,33 @@ const calcAverageHumanAge = function (ages) {
   const average = adults.reduce((acc, curr) => acc + curr, 0) / adults.length;
   return average;
 };
+// by arrow function
+const calcAverageHumanAgearrow = (ages) =>
+  ages
+    .map((age) => (age <= 2 ? 2 * age : 16 + age * 4))
+    .filter((age) => age >= 18)
+    .reduce((acc, curr, i, arr) => acc + curr / arr.length, 0);
 const avg1 = calcAverageHumanAge([5, 2, 4, 1, 15, 8, 3]);
 const avg2 = calcAverageHumanAge([16, 6, 10, 5, 6, 1, 4]);
 console.log(`Average of first calculation is ${avg1}`);
 console.log(`Average of second calculation is ${avg2}`);
 
+const arrowavg1 = calcAverageHumanAgearrow([5, 2, 4, 1, 15, 8, 3]);
+const arrowavg2 = calcAverageHumanAgearrow([16, 6, 10, 5, 6, 1, 4]);
+console.log(`Average of first calculation is ${arrowavg1}`);
+console.log(`Average of second calculation is ${arrowavg2}`);
 const TotalDepostToUSD = movements
   .filter((mov) => mov > 0)
   .map((mov) => mov * eurToUsd)
   .reduce((acc, mov) => acc + mov, 0);
 console.log(TotalDepostToUSD);
+
+// The find Method
+const firstWithdrawal = movements.find((mov) => mov < 0);
+console.log(movements);
+console.log(firstWithdrawal);
+
+console.log(accounts);
+
+const account = accounts.find((acc) => acc.owner === "Jessica Davis");
+console.log(account);
