@@ -76,33 +76,31 @@ const displayMovements = function (movements) {
     containerMovements.insertAdjacentHTML("afterbegin", html);
   });
 };
-displayMovements(account1.movements);
 
 const calcDisplayBalance = function (movement) {
   const balance = movement.reduce((acc, curr) => acc + curr, 0);
   labelBalance.textContent = `${balance} €`;
 };
-calcDisplayBalance(account1.movements);
 
-const CalcDisplaySummary = function (movements) {
-  const incomes = movements
+const CalcDisplaySummary = function (account) {
+  const incomes = account.movements
     .filter((mov) => mov > 0)
     .reduce((acc, curr) => acc + curr, 0);
   labelSumIn.textContent = `${incomes} €`;
 
-  const outgoingIncome = movements
+  const outgoingIncome = account.movements
     .filter((mov) => mov < 0)
     .reduce((acc, curr) => acc + curr, 0);
   labelSumOut.textContent = `${Math.abs(outgoingIncome)} €`;
 
-  const interest = movements
+  const interest = account.movements
     .filter((mov) => mov > 0)
-    .map((deposits) => (deposits * 1.2) / 100)
+    .map((deposits) => (deposits * account.interestRate) / 100)
     .filter((intr) => intr >= 1)
     .reduce((acc, curr) => acc + curr, 0);
   labelSumInterest.textContent = `${interest} €`;
 };
-CalcDisplaySummary(account1.movements);
+
 const CreateuserNames = function (accs) {
   accs.forEach(function (acc) {
     acc.username = acc.owner
@@ -110,12 +108,37 @@ const CreateuserNames = function (accs) {
       .split(" ")
       .map((name) => name[0])
       .join("");
-    console.log(acc.username);
+    // console.log(acc.username);
   });
 };
 CreateuserNames(accounts);
-console.log(account1);
 
+//Event Handlers
+let currentAccount;
+btnLogin.addEventListener("click", function (e) {
+  e.preventDefault();
+  console.log("Login");
+  currentAccount = accounts.find(
+    (acc) => acc.username === inputLoginUsername.value
+  );
+  console.log(currentAccount);
+  if (currentAccount?.pin === Number(inputLoginPin.value)) {
+    labelWelcome.textContent = `Welcome Back ${
+      currentAccount.owner.split(" ")[0]
+    }`;
+    containerApp.style.opacity = 100;
+    inputLoginUsername.value = inputLoginPin.value = " ";
+    inputLoginPin.blur();
+    // Display movements
+    displayMovements(currentAccount.movements);
+
+    // Display balance
+    calcDisplayBalance(currentAccount.movements);
+
+    // Display summary
+    CalcDisplaySummary(currentAccount);
+  }
+});
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
 // LECTURES
