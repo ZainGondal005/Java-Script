@@ -32,8 +32,13 @@ const account4 = {
   interestRate: 1,
   pin: 4444,
 };
-
-const accounts = [account1, account2, account3, account4];
+const account5 = {
+  owner: "Zain Masood",
+  movements: [800, 450, 400, 3000, -650, -130, 70, 1300],
+  interestRate: 1.2, // %
+  pin: 5555,
+};
+const accounts = [account1, account2, account3, account4, account5];
 
 // Elements
 const labelWelcome = document.querySelector(".welcome");
@@ -87,7 +92,7 @@ const CalcDisplaySummary = function (acc) {
   const incomes = acc.movements
     .filter((mov) => mov > 0)
     .reduce((accs, curr) => accs + curr, 0);
-  labelSumIn.textContent = `${incomes} €`;
+  labelSumIn.textContent = `${Math.abs(incomes)} €`;
 
   const outgoingIncome = acc.movements
     .filter((mov) => mov < 0)
@@ -99,7 +104,7 @@ const CalcDisplaySummary = function (acc) {
     .map((deposits) => (deposits * acc.interestRate) / 100)
     .filter((intr) => intr >= 1)
     .reduce((accs, curr) => accs + curr, 0);
-  labelSumInterest.textContent = `${interest} €`;
+  labelSumInterest.textContent = `${Math.abs(interest.toFixed(2))} €`;
 };
 
 const CreateuserNames = function (accs) {
@@ -163,6 +168,40 @@ btnTransfer.addEventListener("click", function (e) {
 
     updateUI(currentAccount);
   }
+});
+
+btnLoan.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  const loan = Number(inputLoanAmount.value);
+  if (loan > 0 && currentAccount.movements.some((mov) => mov >= loan * 0.1)) {
+    currentAccount.movements.push(loan);
+    updateUI(currentAccount);
+  }
+  inputLoanAmount.value = "";
+  inputLoanAmount.blur();
+});
+
+btnClose.addEventListener("click", function (e) {
+  e.preventDefault();
+
+  if (
+    inputCloseUsername.value === currentAccount.username &&
+    Number(inputClosePin.value) === currentAccount.pin
+  ) {
+    const index = accounts.findIndex(
+      (acc) => acc.username === currentAccount.username
+    );
+    console.log(index);
+    // delete the account from the array
+    accounts.splice(index, 1);
+    //hide the interace
+    containerApp.style.opacity = 0;
+
+    console.log(accounts);
+  }
+  inputCloseUsername.value = inputClosePin.value = "";
+  inputClosePin.blur();
 });
 /////////////////////////////////////////////////
 /////////////////////////////////////////////////
