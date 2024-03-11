@@ -22,7 +22,7 @@ const account1 = {
     "2022-08-01T10:51:36.790Z",
   ],
   currency: "EUR",
-  locale: "pt-PT", // de-DE
+  locale: "en-US", // de-DE
 };
 
 const account2 = {
@@ -233,12 +233,32 @@ const updateUI = function (accs) {
 };
 //Event Handlers
 
+const startLogOutTimer = function () {
+  let time = 120;
+
+  const tick = function () {
+    const min = String(Math.trunc(time / 60)).padStart(2, 0);
+
+    const sec = String(time % 60).padStart(2, 0);
+
+    labelTimer.textContent = `${min} ${sec}`;
+    if (time === 0) {
+      clearTimeout(timer);
+      labelWelcome.textContent = "Login in to get started";
+      containerApp.style.opacity = 0;
+    }
+    time--;
+  };
+  tick();
+  const timer = setInterval(tick, 1000);
+  return timer;
+};
 let currentAccount, timer;
 
 // FAKE ALWAYS LOGGED IN
 currentAccount = account1;
 updateUI(currentAccount);
-containerApp.style.opacity = 100;
+// containerApp.style.opacity = 100;
 
 btnLogin.addEventListener("click", function (e) {
   e.preventDefault();
@@ -718,3 +738,31 @@ console.log(dogs.filter(checkEatingOkay));
 // sort it by recommended food portion in an ascending order [1,2,3]
 const dogsSorted = dogs.slice().sort((a, b) => a.recFood - b.recFood);
 console.log(dogsSorted);
+
+//Set time out
+setTimeout(
+  (ing1, ing2) => {
+    console.log(`Here is your Pizza with ${ing1} and ${ing2}`);
+  },
+  3000,
+  "olives",
+  "spanich"
+);
+const ingredents = ["oilers", "sauces", "spinach"];
+const pizzaTimer = setTimeout(
+  (ing0, ing1, ing2) => {
+    console.log(`Here is your Pizza with ${ing0} ${ing1} and ${ing2}`);
+  },
+  3000,
+  ...ingredents
+);
+console.log("Waiting");
+if (ingredents.includes("sinach")) {
+  clearTimeout(pizzaTimer);
+}
+
+//Set Interval
+setInterval(() => {
+  const datetime = new Date();
+  console.log(datetime);
+}, 2500);
