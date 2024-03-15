@@ -1,12 +1,15 @@
 "use strict";
 
-///////////////////////////////////////
-// Modal window
+const btnScrollTo = document.querySelector(".btn--scroll-to");
+const section1 = document.querySelector("#section--1");
 
 const modal = document.querySelector(".modal");
 const overlay = document.querySelector(".overlay");
 const btnCloseModal = document.querySelector(".btn--close-modal");
 const btnsOpenModal = document.querySelectorAll(".btn--show-modal");
+
+///////////////////////////////////////
+// Modal window
 
 const openModal = function (e) {
   e.preventDefault();
@@ -28,9 +31,6 @@ document.addEventListener("keydown", function (e) {
     closeModal();
   }
 });
-
-const btnScrollTo = document.querySelector(".btn--scroll-to");
-const section1 = document.querySelector("#section--1");
 
 btnScrollTo.addEventListener("click", function () {
   const s1coords = section1.getBoundingClientRect();
@@ -54,6 +54,39 @@ btnScrollTo.addEventListener("click", function () {
   });
 });
 
+// page navigator
+// document.querySelectorAll(".nav__link").forEach(function (el) {
+//   el.addEventListener("click", function (e) {
+//     e.preventDefault();
+//     const id = this.getAttribute("href");
+//     console.log(id);
+//     document.querySelector(id).scrollIntoView({
+//       behavior: "smooth",
+//     });
+//   });
+// });
+
+document.querySelector(".nav__links").addEventListener("click", function (e) {
+  console.log(e.target);
+  e.preventDefault();
+  if (e.target.classList.contains("nav__link")) {
+    console.log("link");
+    const id = e.target.getAttribute("href");
+    console.log(id);
+    document.querySelector(id).scrollIntoView({
+      behavior: "smooth",
+    });
+  }
+});
+
+const h1 = document.querySelector("h1");
+console.log(h1.querySelectorAll(".highlight"));
+console.log(h1.childNodes);
+console.log(h1.children);
+h1.firstElementChild.style.color = "white";
+console.log(h1.parentNode);
+console.log("\n-----------------------\n");
+///////////////////////////////////////
 //Lecture
 const header = document.querySelector(".header");
 const allButtons = document.getElementsByTagName("button");
@@ -113,15 +146,15 @@ console.log(link.href);
 console.log(link.getAttribute("href"));
 
 // Types of Events and Event Handlers
-const h1 = document.querySelector("h1");
+// const h1 = document.querySelector("h1");
 
-const alertH1 = function (e) {
-  alert("addEventListener: Great! You are reading the heading :D");
-};
+// const alertH1 = function (e) {
+//   alert("addEventListener: Great! You are reading the heading :D");
+// };
 
-h1.addEventListener("mouseenter", alertH1);
+// h1.addEventListener("mouseenter", alertH1);
 
-setTimeout(() => h1.removeEventListener("mouseenter", alertH1), 3000);
+// setTimeout(() => h1.removeEventListener("mouseenter", alertH1), 3000);
 
 // h1.onmouseenter = function (e) {
 //   alert('onmouseenter: Great! You are reading the heading :D');
@@ -137,7 +170,7 @@ const randomColor = () =>
 
 document.querySelector(".nav__link").addEventListener("click", function (e) {
   this.style.backgroundColor = randomColor();
-  console.log("LINK", e.target, e.currentTarget);
+  // console.log("LINK", e.target, e.currentTarget);
   console.log(e.currentTarget === this);
 
   // Stop propagation
@@ -146,12 +179,12 @@ document.querySelector(".nav__link").addEventListener("click", function (e) {
 
 document.querySelector(".nav__links").addEventListener("click", function (e) {
   this.style.backgroundColor = randomColor();
-  console.log("CONTAINER", e.target, e.currentTarget);
+  // console.log("CONTAINER", e.target, e.currentTarget);
 });
 
 document.querySelector(".nav").addEventListener("click", function (e) {
   this.style.backgroundColor = randomColor();
-  console.log("NAV", e.target, e.currentTarget);
+  // console.log("NAV", e.target, e.currentTarget);
 });
 // },true);
 //capturing phase if we enter true in second parameter
