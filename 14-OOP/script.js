@@ -145,3 +145,75 @@ const account = {
 console.log(account.latest);
 account.latest = 50;
 console.log(account.movements);
+// Object.create
+const PersonProto = {
+  calcAge() {
+    console.log(2037 - this.birthYear);
+  },
+
+  init(firstName, birthYear) {
+    this.firstName = firstName;
+    this.birthYear = birthYear;
+  },
+};
+
+const steven = Object.create(PersonProto);
+console.log(steven);
+steven.name = "Steven";
+steven.birthYear = 2002;
+steven.calcAge();
+
+console.log(steven.__proto__ === PersonProto);
+
+const sarah = Object.create(PersonProto);
+sarah.init("Sarah", 1979);
+sarah.calcAge();
+
+// Coding Challenge #2
+class CarCl {
+  constructor(make, speed) {
+    this.make = make;
+    this.speed = speed;
+  }
+  accelerate() {
+    this.speed += 10;
+
+    console.log(`${this.make} is going at ${this.speed} km/h`);
+  }
+  break() {
+    this.speed -= 5;
+    console.log(`${this.make} is going at ${this.speed} km/h`);
+  }
+
+  get speedUS() {
+    return this.speed / 1.6;
+  }
+  set speedUS(speed) {
+    this.speed = speed * 1.6;
+  }
+}
+const supra = new CarCl("SuprA", 300);
+
+supra.accelerate();
+supra.accelerate();
+supra.break();
+console.log(supra.speedUS);
+supra.speedUS = 50;
+console.log(supra);
+
+// Inheritance
+
+const student = function (firstName, birthYear, course) {
+  Person.call(this, firstName, birthYear);
+  this.course = course;
+};
+student.prototype = Object.create(Person.prototype);
+student.prototype.introduce = function () {
+  console.log(`My name is ${this.firstName} and I study ${this.course}`);
+};
+const mike = new student("Mike", 2020, "Computer Science");
+student.prototype.constructor = student;
+mike.introduce();
+console.log(mike);
+console.log(mike.__proto__.__proto__);
+mike.calcAge();
