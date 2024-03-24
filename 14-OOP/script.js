@@ -102,7 +102,7 @@ mercedes.accelerate();
 
 class PersonCl {
   constructor(firstName, age) {
-    this.firstName = firstName;
+    this.fullName = firstName;
     this.age = age;
   }
   calcAge() {
@@ -110,7 +110,8 @@ class PersonCl {
   }
   get agee() {
     return 2024 - this.age;
-  } // Set a property that already exists
+  }
+  // Set a property that already exists
   set fullName(name) {
     if (name.includes(" ")) this._fullName = name;
     else alert(`${name} is not a full name!`);
@@ -169,7 +170,9 @@ const sarah = Object.create(PersonProto);
 sarah.init("Sarah", 1979);
 sarah.calcAge();
 
+///////////////////////////////////////
 // Coding Challenge #2
+
 class CarCl {
   constructor(make, speed) {
     this.make = make;
@@ -183,6 +186,7 @@ class CarCl {
   break() {
     this.speed -= 5;
     console.log(`${this.make} is going at ${this.speed} km/h`);
+    return this;
   }
 
   get speedUS() {
@@ -201,6 +205,7 @@ console.log(supra.speedUS);
 supra.speedUS = 50;
 console.log(supra);
 
+///////////////////////////////////////
 // Inheritance
 
 const student = function (firstName, birthYear, course) {
@@ -217,3 +222,41 @@ mike.introduce();
 console.log(mike);
 console.log(mike.__proto__.__proto__);
 mike.calcAge();
+
+///////////////////////////////////////
+// Coding Challenge #3
+
+const EV = function (make, speed, charge) {
+  Car.call(this, make, speed);
+  this.charge = charge;
+};
+EV.prototype = Object.create(Car.prototype);
+EV.prototype.chargeBattery = function (chargeTo) {
+  this.charge = chargeTo;
+};
+EV.prototype.accelerate = function () {
+  this.speed += 20;
+  this.charge--;
+  console.log(
+    `${this.make} is going on ${this.speed}km/h with charge of ${this.charge}`
+  );
+};
+const tesla = new EV("tesla", 200, 90);
+tesla.chargeBattery(90);
+tesla.break();
+console.log(tesla);
+tesla.accelerate();
+// Now with ES6 Classes
+
+class StudentCl extends PersonCl {
+  constructor(fullname, birthYear, course) {
+    super(fullname, birthYear);
+    this.course = course;
+  }
+  introduce = function () {
+    console.log(`My name is ${this.fullName} and I study ${this.course}`);
+  };
+}
+const ahmad = new StudentCl("AHMAD MASOOD", 2004, "Computer Science");
+// console.log(ahmad);
+ahmad.introduce();
