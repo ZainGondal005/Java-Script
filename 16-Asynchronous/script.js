@@ -22,8 +22,9 @@ request.addEventListener("load", function () {
         </article>
         `;
   countriesContainer.insertAdjacentHTML("beforeend", html);
-})
-// ;${(  +data.population / 1000000  ).toFixed(1)} 
+  countriesContainer.style.opacity = 1;
+});
+// ;${(  +data.population / 1000000  ).toFixed(1)}
 ///////////////////////////////////////
 // Coding Challenge #1
 /* 
