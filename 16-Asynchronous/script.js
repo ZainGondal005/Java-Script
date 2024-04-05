@@ -23,44 +23,55 @@ const renderCountry = function (data, className = "") {
   countriesContainer.insertAdjacentHTML("beforeend", html);
   countriesContainer.style.opacity = 1;
 };
-const getCountryAndNeighbour = function (country) {
-  const request = new XMLHttpRequest();
-  request.open("GET", `https://restcountries.com/v3.1/name/${country} `);
-  request.send();
-  request.addEventListener("load", function () {
-    const [data] = JSON.parse(this.responseText);
-    console.log(data);
-    renderCountry(data);
-    const neighbour = data.borders?.[0];
+// const getCountryAndNeighbour = function (country) {
+// const request = new XMLHttpRequest();
+// request.open("GET", `https://restcountries.com/v3.1/name/${country} `);
+// request.send();
+//   request.addEventListener("load", function () {
+//     const [data] = JSON.parse(this.responseText);
+//     console.log(data);
+//     renderCountry(data);
+//     const neighbour = data.borders?.[0];
 
-    if (!neighbour) return;
-    console.log("sjs");
-    const request2 = new XMLHttpRequest();
-    request2.open("GET", `https://restcountries.com/v3.1/alpha/${neighbour} `);
-    request2.send();
-    request2.addEventListener("load", function () {
-      const [data2] = JSON.parse(this.responseText);
-      console.log(data2);
-      renderCountry(data2, neighbour);
-    });
-  });
-};
-getCountryAndNeighbour("portugal");
-setTimeout(() => {
-  console.log("1 second passed");
-  setTimeout(() => {
-    console.log("2 second passed");
-    setTimeout(() => {
-      console.log("3 second passed");
-      setTimeout(() => {
-        console.log("4 second passed");
-      }, 1000);
-    }, 1000);
-  }, 1000);
-}, 1000);
+//     if (!neighbour) return;
+//     console.log("sjs");
+//     const request2 = new XMLHttpRequest();
+//     request2.open("GET", `https://restcountries.com/v3.1/alpha/${neighbour} `);
+//     request2.send();
+//     request2.addEventListener("load", function () {
+//       const [data2] = JSON.parse(this.responseText);
+//       console.log(data2);
+//       renderCountry(data2, neighbour);
+//     });
+//   });
+// };
+// getCountryAndNeighbour("portugal");
+// setTimeout(() => {
+//   console.log("1 second passed");
+//   setTimeout(() => {
+//     console.log("2 second passed");
+//     setTimeout(() => {
+//       console.log("3 second passed");
+//       setTimeout(() => {
+//         console.log("4 second passed");
+//       }, 1000);
+//     }, 1000);
+//   }, 1000);
+// }, 1000);
 // getCountryData("pakistan");
 // getCountryData("Usa");
 
+const request = fetch("https://restcountries.com/v3.1/name/portugal");
+console.log(request);
+const getCountryData = function (country) {
+  fetch(`https://restcountries.com/v3.1/name/${country}`)
+    .then((response) => response.json())
+    .then(function (data) {
+      console.log(data);
+      renderCountry(data[0]);
+    });
+};
+getCountryData("portugal");
 // ;${(  +data.population / 1000000  ).toFixed(1)}
 ///////////////////////////////////////
 // Coding Challenge #1
