@@ -114,61 +114,30 @@ const getJSON = function (url, errorMsg = "Something went wrong") {
 //   getCountryData("portugalsdf");
 //   // btn.style.opacity = 0;
 // });
-const getCountryData = function (country) {
-  getJSON(`https://restcountries.com/v3.1/name/${country}`, "Counrty not found")
-    .then((data) => {
-      console.log(data);
-      renderCountry(data[0]);
-      const neighbour = data[0].borders?.[0];
-      // const neighbour = "acs";
-      console.log(neighbour);
-      if (!neighbour) throw new Error("No neighbour found!");
-      console.log("jikk");
-      return getJSON(
-        `https://restcountries.com/v3.1/alpha/${neighbour}`,
-        "Counrty not found"
-      );
-    })
 
-    .then((data) => {
-      console.log(data);
-      renderCountry(data[0], "neighbour");
-    })
-    .catch((err) => {
-      console.log("6tf");
-      console.error(`${err} 💥💥💥`);
-      renderError(`Something went wrong 💥💥 ${err.message}. Try again!`);
-    })
-    .finally(() => {
-      countriesContainer.style.opacity = 1;
-    });
-};
-btn.addEventListener("click", function () {
-  getCountryData("portugal");
-  // btn.style.opacity = 0;
-});
-
+// getJSON
 // const getCountryData = function (country) {
-//   // Country 1
-//   getJSON(
-//     `https://restcountries.eu/rest/v2/name/${country}`,
-//     "Country not found"
-//   )
+//   getJSON(`https://restcountries.com/v3.1/name/${country}`, "Counrty not found")
 //     .then((data) => {
+//       console.log(data);
 //       renderCountry(data[0]);
-//       const neighbour = data[0].borders?.[0];
-
+//       // const neighbour = data[0].borders?.[0];
+//       const neighbour = "acs";
+//       console.log(neighbour);
 //       if (!neighbour) throw new Error("No neighbour found!");
-
-//       // Country 2
+//       console.log("jikk");
 //       return getJSON(
-//         `https://restcountries.eu/rest/v2/alpha/${neighbour}`,
-//         "Country not found"
+//         `https://restcountries.com/v3.1/alpha/${neighbour}`,
+//         "Counrty not found"
 //       );
 //     })
 
-//     .then((data) => renderCountry(data, "neighbour"))
+//     .then((data) => {
+//       console.log(data);
+//       renderCountry(data[0], "neighbour");
+//     })
 //     .catch((err) => {
+//       console.log("6tf");
 //       console.error(`${err} 💥💥💥`);
 //       renderError(`Something went wrong 💥💥 ${err.message}. Try again!`);
 //     })
@@ -176,8 +145,13 @@ btn.addEventListener("click", function () {
 //       countriesContainer.style.opacity = 1;
 //     });
 // };
+// btn.addEventListener("click", function () {
+//   getCountryData("portugal");
+//   // btn.style.opacity = 0;
+// });
 
-// ;${(  +data.population / 1000000  ).toFixed(1)}
+
+
 ///////////////////////////////////////
 // Coding Challenge #1
 /* 
@@ -196,26 +170,26 @@ PART 2
 7. Render the country and catch any errors, just like we have done in the last lecture (you can even copy this code, no need to type the same code)
 */
 
-// const whereAmI = function (lat, lng) {
-//   fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
-//     .then((res) => {
-//       if (!res.ok) throw new Error(`Problem with geocoding ${res.status}`);
-//       return res.json();
-//     })
-//     .then((data) => {
-//       console.log(data);
-//       console.log(`You are in ${data.city}, ${data.country}`);
+const whereAmI = function (lat, lng) {
+  fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`)
+    .then((res) => {
+      if (!res.ok) throw new Error(`Problem with geocoding ${res.status}`);
+      return res.json();
+    })
+    .then((data) => {
+      console.log(data);
+      console.log(`You are in ${data.city}, ${data.country}`);
 
-//       return fetch(`https://restcountries.eu/rest/v2/name/${data.country}`);
-//     })
-//     .then((res) => {
-//       if (!res.ok) throw new Error(`Country not found (${res.status})`);
+      return fetch(`https://restcountries.eu/rest/v2/name/${data.country}`);
+    })
+    .then((res) => {
+      if (!res.ok) throw new Error(`Country not found (${res.status})`);
 
-//       return res.json();
-//     })
-//     .then((data) => renderCountry(data[0]))
-//     .catch((err) => console.error(`${err.message} 💥`));
-// };
-// whereAmI(52.508, 13.381);
-// whereAmI(19.037, 72.873);
-// whereAmI(-33.933, 18.474);
+      return res.json();
+    })
+    .then((data) => renderCountry(data[0]))
+    .catch((err) => console.error(`${err.message} 💥`));
+};
+whereAmI(52.508, 13.381);
+whereAmI(19.037, 72.873);
+whereAmI(-33.933, 18.474);
