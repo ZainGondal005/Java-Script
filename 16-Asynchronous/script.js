@@ -13,9 +13,9 @@ const renderCountry = function (data, className = "") {
             <p class="country__row"><span>👫</span> ${(
               +data.population / 1000000
             ).toFixed(1)}M</p>
-            <p class="country__row"><span>🗣️</span>${data.languages} </p>
+            <p class="country__row"><span>🗣️</span>${data.languages?.urd} </p>
             <p class="country__row"><span>💰</span>${
-              data.currencies?.EUR.name
+              data.currencies?.PKR.name
             } </p>
           </div>
         </article>
@@ -322,3 +322,66 @@ createImage("img/img-1.jpg")
     return wait(2);
   })
   .catch((err) => console.error(err));
+
+const getPosition = function () {
+  return new Promise(function (resolve, reject) {
+    navigator.geolocation.getCurrentPosition(resolve, reject);
+  });
+};
+const whereAmI = async function () {
+  try {
+    const pos = await getPosition();
+    const { latitude: lat, longitude: lng } = pos.coords;
+    const resGeo = await fetch(`https://geocode.xyz/${lat},${lng}?geoit=json`);
+    if (!resGeo.ok) throw new Error("Problem getting data");
+    const dataGeo = await resGeo.json();
+    console.log("dataGeo", dataGeo);
+
+    const res = await fetch(
+      `https://restcountries.com/v3.1/name/${dataGeo.country}`
+    );
+    if (!res.ok) throw new Error("Problem getting data");
+    // console.log(res);
+    const data = await res.json();
+    console.log(data);
+    renderCountry(data[0]);
+    return `You are in ${dataGeo.city}, ${dataGeo.country}`;
+  } catch (error) {
+    console.error(error);
+    renderError(`Somethings not good ${error.message} `);
+    throw err;
+  }
+};
+whereAmI();
+
+console.log("first");
+(async function () {
+  try {
+    const city = await whereAmI();
+    console.log(`2: ${city}`);
+  } catch (err) {
+    console.error(`2: ${err.message} 💥`);
+  }
+  console.log("3: Finished getting location");
+})();
+
+const get3Countries = async function (c1, c2, c3) {
+  try {
+    //  const [data1]= await getJSON(`https://restcountries.com/v3.1/name/${c1}`)
+    // //  console.log('---------------', data1);
+    //  const [data2]= await getJSON(`https://restcountries.com/v3.1/name/${c2}`)
+    // //  console.log('---------------', data2);
+    //  const [data3]= await getJSON(`https://restcountries.com/v3.1/name/${c3}`)
+    // //  console.log('---------------', data3);
+    //  console.log( [data1.capital,data2.capital,data3.capital]);
+    const data = await Promise.all([
+      getJSON(`https://restcountries.com/v3.1/name/${c1}`),
+      getJSON(`https://restcountries.com/v3.1/name/${c2}`),
+      getJSON(`https://restcountries.com/v3.1/name/${c3}`),
+    ]);
+    console.log(data.map((d) => d[0].capital));
+  } catch (err) {
+    console.error(err);
+  }
+};
+get3Countries("portugal", "pakistan", "usa");
