@@ -197,6 +197,7 @@ class App {
       .openPopup();
   }
   _renderWorkout(workout) {
+    // console.log(workout);
     let html = `
       <li class="workout workout--${workout.type}" data-id="${workout.id}">
         <h2 class="workout__title">${workout.description}</h2>
@@ -238,7 +239,7 @@ class App {
         </div>
         <div class="workout__details">
           <span class="workout__icon">⛰</span>
-          <span class="workout__value">${workout.elevationGain}</span>
+          <span class="workout__value">${workout.ElevationGain} </span>
           <span class="workout__unit">m</span>
         </div>
       </li>
